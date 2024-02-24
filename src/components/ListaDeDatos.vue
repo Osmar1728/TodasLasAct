@@ -13,8 +13,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import DataList from './DataList.vue';
 
 interface DataItem {
@@ -23,39 +23,32 @@ interface DataItem {
   textColor: string;
 }
 
-export default defineComponent({
-  components: {
-    DataList
-  },
-  data() {
-    return {
-      dataList:  [
-      { text: 'Lionel Andres MESSI Cuccittini', backgroundColor: 'white', textColor: 'black' },
-      ] as DataItem[],
-      newItemText: ''
+const dataList = ref<DataItem[]>([
+  { text: 'Lionel Andres MESSI Cuccittini', backgroundColor: 'white', textColor: 'black' }
+]);
+const newItemText = ref('');
+
+const añadir = () => {
+  if (newItemText.value.trim().length > 0) {
+    const newItem: DataItem = {
+      text: newItemText.value.trim(),
+      backgroundColor: 'white',
+      textColor: 'black'
     };
-  },
-  methods: {
-    añadir() {
-      if (this.newItemText.trim().length > 0) {
-        const newItem: DataItem = {
-          text: this.newItemText.trim(),
-          backgroundColor: 'white',
-          textColor: 'black'
-        };
-        this.dataList.push(newItem);
-        this.newItemText = '';
-      }
-    },
-    asc() {
-      this.dataList.sort((a, b) => a.text.localeCompare(b.text));
-    },
-    desc() {
-      this.dataList.sort((a, b) => b.text.localeCompare(a.text));
-    }
+    dataList.value.push(newItem);
+    newItemText.value = '';
   }
-});
+};
+
+const asc = () => {
+  dataList.value.sort((a, b) => a.text.localeCompare(b.text));
+};
+
+const desc = () => {
+  dataList.value.sort((a, b) => b.text.localeCompare(a.text));
+};
 </script>
+
 
 <style scoped>
 .container {

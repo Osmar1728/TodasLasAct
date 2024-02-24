@@ -6,8 +6,8 @@
   </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { defineProps } from 'vue';
 
 interface DataItem {
   text: string;
@@ -15,18 +15,14 @@ interface DataItem {
   textColor: string;
 }
 
-export default defineComponent({
-  props: {
-    dataList: {
-      type: Array as PropType<DataItem[]>,
-      required: true
-    }
-  },
-  methods: {
+const props = defineProps<{
+  dataList: DataItem[];
+}>();
 
-  }
-});
+
 </script>
+
+
 
 <style scoped>
 .container {
