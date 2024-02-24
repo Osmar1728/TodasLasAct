@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TareaItem from './components/TareaList.vue'
 import FormularioView from './views/FormularioView.vue';
 </script>
 
